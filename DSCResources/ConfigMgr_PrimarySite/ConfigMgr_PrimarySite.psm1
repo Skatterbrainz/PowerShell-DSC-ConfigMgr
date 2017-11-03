@@ -63,7 +63,7 @@ function Get-TargetResource
     Write-Verbose -Message "Found Configuration Manager WMI Namespace on this server."
 
     $SiteResult = @{
-                      SiteCode = $Site.SiteCode
+       SiteCode = $Site.SiteCode
     }
 
     return $SiteResult
