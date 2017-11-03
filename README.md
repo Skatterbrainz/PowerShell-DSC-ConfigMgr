@@ -35,4 +35,4 @@ The contributors to this project are as follows:
 
 * David O'Brien <obrien.david@outlook.com>
 * Trevor Sullivan <pcgeek86@gmail.com>
-* David Stein <ds0934@hotmail.com>
+* David Stein (use the Issues feature to submit comments/requests)
