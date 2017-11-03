@@ -1,0 +1,7 @@
+[ClassVersion("1.0.0"), FriendlyName("CMBoundary")] 
+class ConfigMgr_Boundary : OMI_BaseResource
+{
+  [key, Description("Three digit code used to identify the Primary Site.")] string SiteCode;
+  [write, Description("SiteName, if empty then Primary Site for %SiteCode%.")] string SiteName;
+  [key, Description("FQDN of SQL Server.")] string SQLServer ;
+};
