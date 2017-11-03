@@ -1,0 +1,15 @@
+[ClassVersion("1.0.0"), FriendlyName("CMPrimarySite")] 
+class ConfigMgr_PrimarySite : OMI_BaseResource
+{
+  [key, Description("Three digit code used to identify the Primary Site.")] string SiteCode;
+  [write, Description("SiteName, if empty then Primary Site for %SiteCode%.")] string SiteName;
+  [key, Description("FQDN of SQL Server.")] string SQLServer ;
+  [key, Description("Path where the ConfigMgr sources are available.")] string SourcePath;
+  [write, Description("Name of SQL Server Instance, if blank, then default MSSQLSERVER assumed.")] string SQLServerInstance ;
+  [write, Description("Port number of SQL Server, if blank, then 1433.")] Uint32 SQLPort ;
+  [write, Description("Path where prereqs will be downloaded to. If blank, then CMPrereqs assumed.")] string PrereqPath;
+  [write, Description("Installation Directory. If blank, then %SystemDrive%CM12 assumed.")] string InstallationDirectory;
+  [write, Description("Server which will hold the SMS Provider role. If empty, localhost.")] string SMSProviderServer;
+  [write, Description("Server which will hold the Management Point role. If empty, localhost.")] string MPServer;
+  [write, Description("Server which will hold the Distribution Point role. If empty, localhost.")] string DPServer;
+};
