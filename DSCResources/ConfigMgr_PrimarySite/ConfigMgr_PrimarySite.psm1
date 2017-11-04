@@ -134,15 +134,14 @@ Function Set-TargetResource
 
     Create-InstallINI -SiteCode $SiteCode -SiteName $SiteName -DPServer $DPServer -MPServer $MPServer -InstallationDirectory $InstallationDirectory -SMSProviderServer $SMSProviderServer -SQLServer $SQLServer -SQLPort $SQLPort -PrereqPath $PrereqPath -SQLServerInstance $SQLServerInstance;
 
-
     Write-Verbose "Installing ConfigMgr Primary Site $SiteCode"
 
     $Process = @{
         FilePath = '{0}\SMSSETUP\BIN\X64\setup.exe' -f $SourcePath;
-        ArgumentList = '/Script "{0}\temp\CM12Unattend.ini" /NoUserInput' -f $env:windir;
+        ArgumentList = '/Script "{0}\temp\CMCBUnattend.ini" /NoUserInput' -f $env:windir;
         Wait = $true;
         PassThru = $true;
-        RedirectStandardOutput = '{0}\temp\CM12-StdOut.txt' -f $env:windir;
+        RedirectStandardOutput = '{0}\temp\CMCB-StdOut.txt' -f $env:windir;
         }
     $Proc = Start-Process @Process;
     $Proc.WaitForExit()
