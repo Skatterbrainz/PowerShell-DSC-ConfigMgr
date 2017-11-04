@@ -8,7 +8,7 @@ class ConfigMgr_PrimarySite : OMI_BaseResource
   [write, Description("Name of SQL Server Instance, if blank, then default MSSQLSERVER assumed.")] string SQLServerInstance ;
   [write, Description("Port number of SQL Server, if blank, then 1433.")] Uint32 SQLPort ;
   [write, Description("Path where prereqs will be downloaded to. If blank, then CMPrereqs assumed.")] string PrereqPath;
-  [write, Description("Installation Directory. If blank, then %SystemDrive%CM12 assumed.")] string InstallationDirectory;
+  [write, Description("Installation Directory. If blank, then %SystemDrive%CMCB assumed.")] string InstallationDirectory;
   [write, Description("Server which will hold the SMS Provider role. If empty, localhost.")] string SMSProviderServer;
   [write, Description("Server which will hold the Management Point role. If empty, localhost.")] string MPServer;
   [write, Description("Server which will hold the Distribution Point role. If empty, localhost.")] string DPServer;
