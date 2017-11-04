@@ -1,4 +1,4 @@
-﻿$ConfigData= 
+$ConfigData= 
 @{ 
     AllNodes =
         @(
@@ -7,18 +7,18 @@
             },
             @{
                 NodeName     = 'DSCServer02.do.local'
-                Role         = 'SiteServer'                                       #Not yet used
-                InstallPath  = 'C:\ConfigMgr'                                     #Where ConfigMgr will be installed
-                CMAdmin      = 'do\SC_Admins'                                     #User or Group that will be added to the Full Administrators Group in ConfigMgr
-                CMSiteCode   = 'DSC'                                              #ConfigMgr three digit Sitecode
-                CMSiteName   = 'DSC Test Site'                                    #ConfigMgr Site Name / Description
-                CMPrereqPath = "$env:windir\temp"                                 #Where ConfigMgr will download the Prereq files to or folder where you have already put them
-                CMSourcePath = '\\dc01\Deployment\Source\SystemCenter\ConfigMgr'  #ConfigMgr installation sources (Computer account needs read permissions to that location)
+                Role         = 'SiteServer'                         # Not yet used
+                InstallPath  = 'C:\ConfigMgr'                       # Where ConfigMgr will be installed
+                CMAdmin      = 'do\SC_Admins'                       # User or Group that will be added to the Full Administrators Group in ConfigMgr
+                CMSiteCode   = 'P01'                                # ConfigMgr three digit Sitecode
+                CMSiteName   = 'DSC Test Site'                      # ConfigMgr Site Name / Description
+                CMPrereqPath = "$env:WINDIR\TEMP"                   # Where ConfigMgr will download the Prereq files to or folder where you have already put them
+                CMSourcePath = '\\dc01\Deployment\Source\ConfigMgr' # ConfigMgr installation sources (Computer account needs read permissions to that location)
             }
         );
 }
 
-configuration CM {
+configuration CMCB {
     param()
 
     #Import-DscResource -Module xSqlPs
@@ -145,11 +145,11 @@ configuration CM {
                     PrereqPath = "$($Node.CMPrereqPath)"
                     SourcePath = "$($Node.CMSourcePath)"
                     #SQLServerInstance = ''
-                    DPServer  = "$($Node.NodeName)"
-                    MPServer  = "$($Node.NodeName)"
+                    DPServer   = "$($Node.NodeName)"
+                    MPServer   = "$($Node.NodeName)"
                     SMSProviderServer = "$($Node.NodeName)"
                     InstallationDirectory = "$($Node.InstallPath)"
-                    DependsOn =  @('[Package]DeploymentTools')
+                    DependsOn  =  @('[Package]DeploymentTools')
                 }
             <#
             xSqlServerInstall installSqlServer
@@ -199,7 +199,7 @@ configuration CM {
                     SetScript = {
                             Write-verbose "In SetScript AddCMAdmin"
                             $CMModulePath = "$(Join-Path $($USING:Node.InstallPath) AdminConsole\bin\ConfigurationManager.psd1)"
-                            $cert = Get-AuthenticodeSignature -FilePath "$CM12ModulePath" -ErrorAction SilentlyContinue
+                            $cert = Get-AuthenticodeSignature -FilePath "$CMModulePath" -ErrorAction SilentlyContinue
                             $store = new-object System.Security.Cryptography.X509Certificates.X509Store("TrustedPublisher","LocalMachine")
                             $store.Open("MaxAllowed")
                             Write-Verbose "Adding cert to store"
@@ -214,6 +214,6 @@ configuration CM {
         }
 }
 
-CM -ConfigurationData $ConfigData -OutputPath C:\temp\CM
+CM -ConfigurationData $ConfigData -OutputPath C:\temp\CMCB
 
-#Start-DscConfiguration -Wait -ComputerName DSCTestServer.do.local -Path \\dc01\sources\Tools\scripts\Powershell_DSC\CM -Verbose
+#Start-DscConfiguration -Wait -ComputerName DSCTestServer.do.local -Path \\dc01\sources\Tools\scripts\Powershell_DSC\CMCB -Verbose
